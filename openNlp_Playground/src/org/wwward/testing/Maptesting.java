@@ -9,6 +9,9 @@ import java.io.IOException;
 
 public class Maptesting {
 	
+	//Bigram Frequency Counts
+	// 2D hashmap to form lookup table
+	// key1 = (String) POS "Column", (String) key2 = POS "Row", (Integer) Value = Frequency
 	private class bigramFrequency {
 		HashMap<String, HashMap<String, Integer>> columns;
 		
@@ -33,6 +36,30 @@ public class Maptesting {
 			return (Integer) row.get(key2);
 		}
 		
+		public String outerKeys(){
+			return columns.keySet();
+		}
+		
+	}
+	
+	// Unigram Frequency Counts
+	// Wrapper for a simple hashmap in case I want to add more later.
+	// Key = (String) POS, Value = (Integer) Frequency
+	private class unigramFrequency {
+		HashMap<String, Integer> table;
+		
+		unigramFrequency() {
+			table = new HashMap<String, Integer>();
+		}
+		
+		public void put(String key1, Integer value) {
+			table.put(key1, value);
+		}
+		
+		public Integer get(String key1) {
+			return table.get(key1);
+		}
+		
 	}
 	
 	Maptesting(File file) {
@@ -47,6 +74,8 @@ public class Maptesting {
 		bigramFrequency m = new bigramFrequency();
 		this.doSomething(m, br);
 	}
+	
+	
 	
 	void doSomething(bigramFrequency m, BufferedReader br) {
 		String previousTag = "<s>";
