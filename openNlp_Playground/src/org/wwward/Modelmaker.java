@@ -1,4 +1,4 @@
-package org.wwward.testing;
+package org.wwward;
 
 import opennlp.maxent.BasicEventStream;
 import opennlp.maxent.GIS;
@@ -20,7 +20,7 @@ public class Modelmaker {
 		//Open File
 		FileReader fileReader = null;
 		try {
-			fileReader = new FileReader(new File("/Users/wwward/Downloads/NounGroupsforNLPClass/train.np"));
+			fileReader = new FileReader(new File(args[0]));
 		} catch (FileNotFoundException e) {
 			System.err.println("main: ERROR Unable to open file.");
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class Modelmaker {
 		} 
 		
 		//Output step
-		File outputFile = new File("/Users/wwward/Downloads/NounGroupsforNLPClass/train.txt");
+		File outputFile = new File(args[1]);
 		try {
 			GISModelWriter writer = new SuffixSensitiveGISModelWriter(model, outputFile);
 			writer.persist();

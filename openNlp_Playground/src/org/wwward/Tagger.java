@@ -1,4 +1,4 @@
-package org.wwward.testing;
+package org.wwward;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,7 +31,7 @@ public class Tagger {
 		double[] ocs;
 		HashMap<String, Double> outcomes = new HashMap<String, Double>();
 		ocs = model.eval(contexts);
-		System.out.println("For context: " + predicates + "\n" + model.getAllOutcomes(ocs) + "\n");
+//		System.out.println("For context: " + predicates + "\n" + model.getAllOutcomes(ocs) + "\n");
 //		System.out.println("Best: " + model.getBestOutcome(ocs) + "\n");
 		for (int i = 0; (i < ocs.length); i++) {
 			outcomes.put(model.getOutcome(i), ocs[i]);
@@ -70,7 +70,7 @@ public class Tagger {
 		try {
 			DataStream ds = new PlainTextByLineDataStream(new FileReader(new File(dataFileName)));
 			ArrayList<String> obs = new ArrayList<String>();
-			HashMap<String, Double> maxobs = new HashMap<String, Double>();
+			//HashMap<String, Double> maxobs = new HashMap<String, Double>();
 			while (ds.hasNext()) {
 				String s = (String)ds.nextToken();
 				obs.add(s);
@@ -85,7 +85,7 @@ public class Tagger {
 					for (String observation : obs) {
 						if (!observation.trim().isEmpty()) {
 							String[] temp = observation.split("\t");
-							String substring = temp[0];
+							String substring = temp[0] + " " + temp[1]; // try adding the POS tag may14
 							V.put(observation, predictor.eval(substring, false));
 						}
 					}
